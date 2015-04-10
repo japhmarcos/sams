@@ -1,0 +1,134 @@
+@extends('layouts.master')
+
+@section('head')
+	@parent
+	<title>Create Subject</title>
+@stop
+
+
+@yield('sidebar')
+
+@section('content')
+
+<div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Create Subject
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="{{ URL::route('admin.index') }}"><i class="fa fa-dashboard"></i> Admin Dashboard</a></li>
+            <li><a href="{{ URL::route('viewSubject') }}">Manage Subjects</a></li>
+            <li class="active">Add Subject</li>
+          </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+          <!-- Default box -->
+          <div class="box">
+            <div class="box-header with-border">
+              <div class="box-tools pull-right">
+                <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
+                <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="box-body">
+             <form role="form" method="post" action="{{ URL::route('subjectStore') }}">
+
+  <div class="form-group">
+
+
+  {{ Form::label('teacher_name', 'Assign a Teacher to this subject:') }}
+          {{ Form::select('teacher_id', $users1, null) }}
+  </div>
+
+ <div class="form-group">
+
+
+  {{ Form::label('section_name', 'Assign a Section to this subject:') }}
+          {{ Form::select('section_name', $sections, null) }}
+  </div>
+
+   <div class="form-group">
+
+
+  {{ Form::label('room_name', 'Assign a Room Number to this subject:') }}
+          {{ Form::select('room_name', $room, null) }}
+  </div>
+
+
+ 
+  
+
+    <div class="form-group{{ ($errors->has('code')) ? ' has-error' : '' }}">
+      <label for="code">Subject Code: </label> 
+      <input id="code" name="code" type="text" class="form-control">
+      @if($errors->has('code'))
+      {{ $errors->first('code') }}
+      @endif
+      
+  </div>
+
+    <div class="form-group{{ ($errors->has('name')) ? ' has-error' : '' }}">
+      <label for="name">Subject Description: </label> 
+      <input id="name" name="name" type="text" class="form-control">
+      @if($errors->has('name'))
+      {{ $errors->first('name') }}
+      @endif
+      
+  </div>
+
+  <div class="form-group{{ ($errors->has('name')) ? ' has-error' : '' }}">
+      <label for="name">Subject Info: </label> 
+     <textarea class="form-control" rows="3" id= "info" name = "info"></textarea>
+      @if($errors->has('info'))
+      {{ $errors->first('info') }}
+      @endif
+      
+
+
+  </div>
+
+  <div class="form-group{{ ($errors->has('starttime')) ? ' has-error' : '' }}">
+      <label for="starttime">Start time: </label> 
+      <input id="starttime" name="starttime" type="time" class="form-control">
+      @if($errors->has('starttime'))
+      {{ $errors->first('starttime') }}
+      @endif
+      
+  </div>
+  
+
+  <div class="form-group{{ ($errors->has('endtime')) ? ' has-error' : '' }}">
+      <label for="endtime">End time: </label> 
+      <input id="endtime" name="endtime" type="time" class="form-control">
+      @if($errors->has('endtime'))
+      {{ $errors->first('endtime') }}
+      @endif
+      
+  </div>
+  
+    
+  {{ Form::token() }}
+    
+    <div class="form-group">
+    <input type="submit" value="Create New Subject" class="btn btn-primary">
+  </form>
+  </div>
+        @if ($errors->any())
+          <ul>
+            {{ implode('', $errors->all('<li class="error">:message</li>')) }}
+          </ul>
+        @endif
+            </div><!-- /.box-body -->
+           
+
+        </section><!-- /.content -->
+      </div><!-- /.content-wrapper -->
+
+
+
+        @stop
